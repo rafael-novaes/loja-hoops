@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Hoops: loja virtual de tênis, roupas e equipamentos de basquete."
+    />
+    <title>Hoops | Loja de Basquete</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style/style.css" />
+    <script type="module" src="./js/app.js"></script>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container">
+        <p>Frete grátis acima de R$ 250 em produtos Hoops</p>
+        <p><a href="#">Acompanhar pedido</a><a href="#">Ajuda</a></p>
+      </div>
+    </div>
+
+    <header class="masthead">
+      <div class="container">
+        <a class="logo" href="#inicio" aria-label="Hoops, início">HOOPS</a>
+
+        <nav aria-label="Categorias">
+          <a href="#produtos" data-cat="Tênis">Tênis</a>
+          <a href="#produtos" data-cat="Roupas">Roupas</a>
+          <a href="#produtos" data-cat="Equipamentos">Equipamentos</a>
+          <a href="#produtos" data-cat="Acessórios">Acessórios</a>
+        </nav>
+
+        <div class="acoes">
+          <input
+            id="busca"
+            class="busca"
+            type="search"
+            placeholder="Buscar produtos..."
+            aria-label="Buscar produtos"
+          />
+          <button
+            id="btn-carrinho"
+            class="icone"
+            type="button"
+            aria-controls="drawer"
+            aria-label="Abrir carrinho, 0 itens"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="9" cy="20" r="1" />
+              <circle cx="18" cy="20" r="1" />
+              <path
+                d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"
+              />
+            </svg>
+            <span id="contador" class="contador" aria-hidden="true">0</span>
+          </button>
+          <button
+            id="btn-tema"
+            class="icone"
+            type="button"
+            aria-label="Ativar tema escuro"
+          >
+            🌙
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero container" aria-labelledby="titulo-hero">
+        <div class="hero-texto">
+          <p class="eyebrow">SEMANA DO BASQUETE</p>
+          <h1 id="titulo-hero">Equipamentos que elevam seu jogo</h1>
+          <p>
+            Confira nossa seleção de tênis, camisas e acessórios com até 35% de
+            desconto. Estilo e desempenho para a quadra.
+          </p>
+          <a class="btn btn-pill" href="#produtos">Ver ofertas</a>
+        </div>
+        <div class="hero-img">
+          <img
+            src="media/hoops-destaque.jpg"
+            alt="Jogador de basquete em salto de enterrada diante da letra H"
+          />
+        </div>
+      </section>
+
+      <section
+        id="produtos"
+        class="container"
+        aria-labelledby="titulo-produtos"
+      >
+        <h2 id="titulo-produtos" class="sr-only">Produtos</h2>
+
+        <div class="toolbar">
+          <div
+            id="filtros"
+            class="filtros"
+            role="group"
+            aria-label="Filtrar por categoria"
+          ></div>
+          <p id="total-produtos" class="total-produtos" aria-live="polite">
+            0 produtos
+          </p>
+          <select id="ordem" aria-label="Ordenar produtos">
+            <option value="relevancia">Ordenar: relevância</option>
+            <option value="menor">Menor preço</option>
+            <option value="maior">Maior preço</option>
+            <option value="avaliacao">Melhor avaliação</option>
+          </select>
+        </div>
+
+        <div id="grade" class="grade"></div>
+        <p id="vazio" class="vazio" hidden>
+          Nenhum produto encontrado. Tente outra busca ou categoria.
+        </p>
+      </section>
+
+      <section class="newsletter container" aria-labelledby="titulo-news">
+        <h2 id="titulo-news">Ganhe 10% em sua primeira compra</h2>
+        <p>
+          Assine a newsletter e receba o cupom de boas-vindas, além das ofertas
+          da semana.
+        </p>
+        <form id="form-news" novalidate>
+          <input
+            id="email"
+            type="email"
+            placeholder="seu.email@exemplo.com"
+            aria-label="Seu e-mail"
+            required
+          />
+          <button class="btn btn-escuro" type="submit">Quero o cupom</button>
+        </form>
+        <p id="msg-news" role="status"></p>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>© 2026 Hoops · Loja-modelo para fins didáticos</p>
+        <p>
+          <a href="#">Trocas</a><a href="#">Entrega</a
+          ><a href="#">Privacidade</a><a href="#">Contato</a>
+        </p>
+      </div>
+    </footer>
+
+    <div id="overlay" class="overlay" hidden></div>
+    <aside
+      id="drawer"
+      class="drawer"
+      aria-labelledby="titulo-carrinho"
+      aria-hidden="true"
+    >
+      <div class="drawer-topo">
+        <h2 id="titulo-carrinho">Seu carrinho</h2>
+        <button
+          id="fechar-carrinho"
+          class="icone"
+          type="button"
+          aria-label="Fechar carrinho"
+        >
+          ✕
+        </button>
+      </div>
+      <ul id="itens-carrinho" class="itens"></ul>
+      <p id="carrinho-vazio" class="vazio">
+        Seu carrinho está vazio. Adicione um produto para começar.
+      </p>
+      <div class="drawer-rodape">
+        <p class="linha-total">
+          <span>Total</span><strong id="total">R$ 0,00</strong>
+        </p>
+        <button id="btn-finalizar" class="btn" type="button">
+          Finalizar compra
+        </button>
+      </div>
+    </aside>
+
+    <div id="toasts" class="toasts" aria-live="polite"></div>
+  </body>
+</html>

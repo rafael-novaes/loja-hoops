@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pix recebido | Hoops</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="./style/pagamento.css" />
+  </head>
+  <body>
+    <header class="pg-topo">
+      <div class="container">
+        <a class="logo" href="index.html" aria-label="Hoops, voltar à loja">HOOPS</a>
+      </div>
+    </header>
+
+    <main class="container confirmacao">
+      <h1 id="titulo">Pagamento Pix recebido</h1>
+      <p id="texto"></p>
+      <a class="btn" href="index.html">Voltar à loja</a>
+    </main>
+
+    <script>
+      try {
+        const salvo = localStorage.getItem("hoops:tema");
+        document.documentElement.dataset.tema = salvo || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch { /* sem localStorage */ }
+
+      const params = new URLSearchParams(location.search);
+      const pedido = params.get("pedido") ?? "";
+      const total = Number(params.get("total"));
+      const texto = document.getElementById("texto");
+
+      if (/^\d{1,8}$/.test(pedido) && Number.isFinite(total) && total > 0) {
+        const valor = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+        texto.textContent = `Pedido #${pedido} pago com Pix. Total: ${valor}. Obrigado por comprar na Hoops! (pagamento simulado)`;
+      } else {
+        texto.textContent = "Seu pagamento via Pix foi recebido. Obrigado por comprar na Hoops! (pagamento simulado)";
+      }
+    </script>
+  </body>
+</html>

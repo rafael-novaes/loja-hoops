@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagamento | Hoops</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="./style/pagamento.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script type="module" src="./js/pagamento.js"></script>
+  </head>
+  <body>
+    <header class="pg-topo">
+      <div class="container">
+        <a class="logo" href="index.html" aria-label="Hoops, voltar à loja">HOOPS</a>
+        <a href="index.html">Voltar à loja</a>
+      </div>
+    </header>
+
+    <main class="container pg-layout" id="checkout">
+      <form id="form-pagamento" novalidate>
+        <h1>Pagamento</h1>
+
+        <fieldset>
+          <legend>Seus dados</legend>
+          <label class="campo">Nome completo
+            <input id="nome" type="text" autocomplete="name" />
+          </label>
+          <label class="campo">E-mail
+            <input id="email" type="email" autocomplete="email" placeholder="nome@exemplo.com" />
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Forma de pagamento</legend>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="forma" value="cartao" checked /><span>Cartão de crédito</span></label>
+            <label class="opcao"><input type="radio" name="forma" value="pix" /><span>Pix <small>5% de desconto</small></span></label>
+          </div>
+
+          <div id="painel-cartao">
+            <label class="campo">Número do cartão
+              <input id="cc-numero" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000" />
+            </label>
+            <label class="campo">Nome impresso no cartão
+              <input id="cc-nome" type="text" autocomplete="cc-name" />
+            </label>
+            <div class="linha">
+              <label class="campo">Validade
+                <input id="cc-validade" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA" />
+              </label>
+              <label class="campo">CVV
+                <input id="cc-cvv" type="text" inputmode="numeric" autocomplete="cc-csc" placeholder="123" />
+              </label>
+            </div>
+            <label class="campo">Parcelas
+              <select id="parcelas"></select>
+            </label>
+          </div>
+
+          <div id="painel-pix" class="pix" hidden>
+            <div id="qr" class="qr"></div>
+            <div>
+              <p>Aponte a câmera do celular para o QR Code ou copie o link abaixo. Depois, confirme o pagamento.</p>
+              <label class="sr-only" for="codigo-pix">Link de pagamento Pix</label>
+              <textarea id="codigo-pix" readonly></textarea>
+              <button id="copiar-pix" class="btn btn-escuro" type="button">Copiar link</button>
+            </div>
+          </div>
+        </fieldset>
+
+        <ul id="erros" class="erros" role="alert" hidden></ul>
+        <button id="btn-pagar" class="btn" type="submit">Pagar</button>
+        <p class="aviso">Pagamento simulado para fins didáticos. Nenhum dado é enviado ou guardado.</p>
+      </form>
+
+      <aside class="pg-resumo" aria-labelledby="titulo-resumo">
+        <h2 id="titulo-resumo">Resumo do pedido</h2>
+        <ul id="resumo-itens" class="resumo-itens"></ul>
+        <dl class="valores">
+          <div><dt>Subtotal</dt><dd id="v-subtotal"></dd></div>
+          <div class="desconto" id="linha-desconto" hidden><dt>Desconto Pix (5%)</dt><dd id="v-desconto"></dd></div>
+          <div class="total"><dt>Total</dt><dd id="v-total"></dd></div>
+        </dl>
+      </aside>
+    </main>
+
+    <section id="confirmacao" class="container confirmacao" aria-live="polite" hidden>
+      <h1>Pedido confirmado!</h1>
+      <p id="texto-confirmacao"></p>
+      <a class="btn" href="index.html">Continuar comprando</a>
+    </section>
+  </body>
+</html>
